@@ -147,7 +147,7 @@ void minigame_loop(float deltaTime)
   tileOffset += 5.0f * deltaTime;
 	transformOffset += 0.2f * deltaTime;
   
-  t3d_viewport_set_projection(&viewport, T3D_DEG_TO_RAD(85.0f), 10.0f, 150.0f);
+  t3d_viewport_set_projection(&viewport, T3D_DEG_TO_RAD(90.0f), 20.0f, 160.0f);
   t3d_viewport_look_at(&viewport, &camPos, &camTarget, &(T3DVec3){{0,1,0}});
   
   // ======== Transform Water Mesh ======== //
@@ -200,9 +200,15 @@ void minigame_loop(float deltaTime)
   
   // Draw water
   rspq_block_run(dplWater);
-  
+  /*t3d_matrix_push(waterMatFP);
+  t3d_model_draw_custom(waterModel, (T3DModelDrawConf){
+    .userData = &tileOffset,
+    .tileCb = tile_scroll,
+  });
+  t3d_matrix_pop(1);
+  */
   t3d_fog_set_range(0.4f, 120.0f);
-	t3d_fog_set_enabled(true);
+  t3d_fog_set_enabled(true);
   
   syncPoint = rspq_syncpoint_new();
   
